@@ -1,0 +1,31 @@
+[{
+    "id": "admin-router",
+    "order": 0,
+    "predicates": [{
+        "args": {
+            "pattern": "/api/admin/**"
+        },
+        "name": "Path"
+    }],
+    "uri": "lb://luck-admin"
+},{
+    "id": "lottery-router",
+    "order": 1,
+    "predicates": [{
+        "args": {
+            "pattern": "/api/lottery/**"
+        },
+        "name": "Path"
+    }],
+    "uri": "lb://luck-lottery"
+},{
+    "id": "renren-router",
+    "order": 2,
+    "predicates": [{
+        "args": {
+            "pattern": "/renren-fast/**"
+        },
+        "name": "Path"
+    }],
+    "uri": "lb://renren-fast"
+}]

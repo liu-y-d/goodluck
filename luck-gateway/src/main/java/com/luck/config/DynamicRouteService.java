@@ -58,7 +58,7 @@ public class DynamicRouteService implements ApplicationEventPublisherAware {
     */
    public String update(RouteDefinition definition) {
       try {
-         this.routeDefinitionWriter.delete(Mono.just(definition.getId()));
+         this.routeDefinitionWriter.delete(Mono.just(definition.getId())).subscribe();
          this.routeDefinitionWriter.save(Mono.just(definition)).subscribe();
          this.publisher.publishEvent(new RefreshRoutesEvent(this));
          return "update success";

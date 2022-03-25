@@ -32,6 +32,7 @@ public class DynamicRouteServiceListener {
 
    private final DynamicRouteService dynamicRouteService;
    private final NacosDiscoveryProperties nacosDiscoveryProperties;
+
    private final NacosConfigProperties nacosConfigProperties;
 
 

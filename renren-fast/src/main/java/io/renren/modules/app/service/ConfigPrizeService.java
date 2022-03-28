@@ -1,10 +1,8 @@
 package io.renren.modules.app.service;
 
-
 import com.baomidou.mybatisplus.extension.service.IService;
 import io.renren.common.utils.PageUtils;
-import io.renren.modules.app.entity.ActivityConfigEntity;
-import io.renren.modules.app.vo.ConfigPrizeVo;
+import io.renren.modules.app.entity.ConfigPrizeEntity;
 
 import java.util.Map;
 
@@ -13,12 +11,10 @@ import java.util.Map;
  *
  * @author chenshun
  * @email sunlightcs@gmail.com
- * @date 2022-03-24 17:20:55
+ * @date 2022-03-28 11:37:59
  */
-public interface ActivityConfigService extends IService<ActivityConfigEntity> {
+public interface ConfigPrizeService extends IService<ConfigPrizeEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
-
-    void saveConfig(ConfigPrizeVo configPrizeVo);
 }
 

@@ -2,11 +2,9 @@ package io.renren.modules.app.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.math.BigDecimal;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * ${comments}
@@ -30,22 +28,6 @@ public class ActivityConfigEntity implements Serializable {
 	 */
 	private String configName;
 	/**
-	 * 奖品id
-	 */
-	private Long prizeId;
-	/**
-	 * 奖品数量
-	 */
-	private Integer prizeNumber;
-	/**
-	 * 奖品概率限制 0 动态 1 固定
-	 */
-	private Integer prizeProbabilityFixed;
-	/**
-	 * 奖品概率
-	 */
-	private BigDecimal prizeProbability;
-	/**
 	 * 是否允许中大奖 0 不允许 1 允许
 	 */
 	private Integer winPrize;
@@ -53,13 +35,5 @@ public class ActivityConfigEntity implements Serializable {
 	 * 参与多少次中大奖
 	 */
 	private Integer winPrizeNumber;
-	/**
-	 * 奖品总数限制 0 不限制 1限制
-	 */
-	private Integer prizeTotalLimit;
-	/**
-	 * 奖品总数
-	 */
-	private Long prizeTotal;
 
 }

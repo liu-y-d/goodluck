@@ -1,17 +1,15 @@
 package io.renren.modules.app.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import io.renren.common.utils.PageUtils;
+import io.renren.common.utils.R;
 import io.renren.modules.app.entity.ActivityConfigEntity;
 import io.renren.modules.app.service.ActivityConfigService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import io.renren.modules.app.vo.ConfigPrizeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
-import io.renren.common.utils.PageUtils;
-import io.renren.common.utils.R;
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -53,8 +51,8 @@ public class ActivityConfigController {
      * 保存
      */
     @PostMapping("/save")
-    public R save(@RequestBody ActivityConfigEntity activityConfig){
-		activityConfigService.save(activityConfig);
+    public R save(@RequestBody ConfigPrizeVo activityConfig){
+		activityConfigService.saveConfig(activityConfig);
 
         return R.ok();
     }

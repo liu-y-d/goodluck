@@ -27,8 +27,7 @@ public class LotteryController {
     private LotteryService lotteryService;
     @PostMapping("/lottery/get")
     public R<List<PrizeVo>> lottery(@RequestBody LotteryVo lotteryVo) {
-        System.out.println(1);
-        return null;
+        return lotteryService.lottery(lotteryVo);
     }
 
 

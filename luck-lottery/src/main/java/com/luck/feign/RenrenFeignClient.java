@@ -3,6 +3,7 @@ package com.luck.feign;
 import com.luck.api.R;
 import com.luck.utils.PageUtils;
 import com.luck.vo.ConfigDetailVo;
+import com.luck.vo.CustomerIntegralEntity;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,4 +24,7 @@ public interface RenrenFeignClient {
     R<PageUtils> activityList(@RequestParam Map<String, Object> params);
     @GetMapping("/activity/config/detail/{activityId}")
     R<ConfigDetailVo> getConfig(@PathVariable("activityId") Long activityId);
+
+    @GetMapping("/customer/integral/info/{cId}")
+    R<CustomerIntegralEntity> info(@PathVariable("cId") Long cId);
 }

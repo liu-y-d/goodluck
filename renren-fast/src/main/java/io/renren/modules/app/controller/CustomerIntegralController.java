@@ -1,16 +1,14 @@
 package io.renren.modules.app.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import io.renren.common.utils.PageUtils;
+import io.renren.common.utils.R;
 import io.renren.modules.app.entity.CustomerIntegralEntity;
 import io.renren.modules.app.service.CustomerIntegralService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
-import io.renren.common.utils.PageUtils;
-import io.renren.common.utils.R;
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -22,7 +20,7 @@ import io.renren.common.utils.R;
  * @date 2022-03-24 17:20:55
  */
 @RestController
-@RequestMapping("customerintegral")
+@RequestMapping("customer/integral")
 public class CustomerIntegralController {
     @Autowired
     private CustomerIntegralService customerIntegralService;

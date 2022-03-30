@@ -2,10 +2,9 @@ package io.renren.modules.app.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
-import lombok.Data;
 
 /**
  * ${comments}
@@ -33,4 +32,5 @@ public class CustomerEntity implements Serializable {
 	 */
 	private String cPhone;
 
+	private String cPassword;
 }

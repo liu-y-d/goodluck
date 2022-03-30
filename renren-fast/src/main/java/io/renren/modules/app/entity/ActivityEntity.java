@@ -2,11 +2,11 @@ package io.renren.modules.app.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.math.BigDecimal;
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * ${comments}
@@ -36,11 +36,11 @@ public class ActivityEntity implements Serializable {
 	/**
 	 * 活动开始日期
 	 */
-	private Date activityStarttime;
+	private Date activityStartTime;
 	/**
 	 * 活动结束日期
 	 */
-	private Date activityEndtime;
+	private Date activityEndTime;
 	/**
 	 * 参与人数限制 0 不限制 1 限制
 	 */

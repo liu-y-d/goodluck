@@ -29,6 +29,11 @@
         <lombok-version>1.18.22</lombok-version>
         <common-lang3-version>3.9</common-lang3-version>
         <fastjson-version>1.2.58</fastjson-version>
+        <jjwt.version>0.9.1</jjwt.version>
+        <security-jwt.version>1.0.10.RELEASE</security-jwt.version>
+        <redis-version>2.1.14.RELEASE</redis-version>
+        <security-oauth2-version>2.2.4.RELEASE</security-oauth2-version>
+        <mssql.version>4.0</mssql.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -64,6 +69,12 @@
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus-version}</version>
             </dependency>
+            <!--mssql驱动-->
+            <dependency>
+                <groupId>com.microsoft.sqlserver</groupId>
+                <artifactId>sqljdbc4</artifactId>
+                <version>${mssql.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
@@ -73,6 +84,26 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>${security-jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${redis-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${security-oauth2-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

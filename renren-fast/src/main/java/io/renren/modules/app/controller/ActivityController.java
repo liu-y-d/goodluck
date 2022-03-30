@@ -1,16 +1,14 @@
 package io.renren.modules.app.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import io.renren.common.utils.PageUtils;
+import io.renren.common.utils.R;
 import io.renren.modules.app.entity.ActivityEntity;
 import io.renren.modules.app.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
-import io.renren.common.utils.PageUtils;
-import io.renren.common.utils.R;
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -33,8 +31,7 @@ public class ActivityController {
     @GetMapping("/list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = activityService.queryPage(params);
-
-        return R.ok().put("page", page);
+        return R.ok(200).put("data", page);
     }
 
 

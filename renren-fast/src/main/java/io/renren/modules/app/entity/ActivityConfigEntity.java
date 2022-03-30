@@ -35,5 +35,12 @@ public class ActivityConfigEntity implements Serializable {
 	 * 参与多少次中大奖
 	 */
 	private Integer winPrizeNumber;
-
+	/**
+	 * 是否连抽 0 不允许 1 允许
+	 */
+	private Integer batchGet;
+	/**
+	 * 连抽多少次
+	 */
+	private Integer batchGetNumber;
 }

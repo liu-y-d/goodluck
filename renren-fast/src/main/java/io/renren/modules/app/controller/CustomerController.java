@@ -1,16 +1,15 @@
 package io.renren.modules.app.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import io.renren.common.utils.PageUtils;
+import io.renren.common.utils.R;
 import io.renren.modules.app.entity.CustomerEntity;
 import io.renren.modules.app.service.CustomerService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import io.renren.common.utils.PageUtils;
-import io.renren.common.utils.R;
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -46,6 +45,15 @@ public class CustomerController {
 		CustomerEntity customer = customerService.getById(cId);
 
         return R.ok().put("customer", customer);
+    }
+    /**
+     * 信息
+     */
+    @GetMapping("/info")
+    public R info(@RequestParam("username") String username){
+        CustomerEntity customer = customerService.getOne(new QueryWrapper<CustomerEntity>().eq("c_phone",username));
+
+        return R.ok(200).put("data", customer);
     }
 
     /**

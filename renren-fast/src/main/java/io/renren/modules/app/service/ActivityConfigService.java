@@ -4,7 +4,8 @@ package io.renren.modules.app.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import io.renren.common.utils.PageUtils;
 import io.renren.modules.app.entity.ActivityConfigEntity;
-import io.renren.modules.app.vo.ConfigPrizeVo;
+import io.renren.modules.app.vo.ActivityConfigVo;
+import io.renren.modules.app.vo.ConfigDetailVo;
 
 import java.util.Map;
 
@@ -19,6 +20,8 @@ public interface ActivityConfigService extends IService<ActivityConfigEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
 
-    void saveConfig(ConfigPrizeVo configPrizeVo);
+    void saveConfig(ActivityConfigVo activityConfigVo);
+
+    ConfigDetailVo getConfig(Long activityId);
 }
 

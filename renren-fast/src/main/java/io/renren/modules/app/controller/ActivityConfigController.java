@@ -4,7 +4,7 @@ import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.R;
 import io.renren.modules.app.entity.ActivityConfigEntity;
 import io.renren.modules.app.service.ActivityConfigService;
-import io.renren.modules.app.vo.ConfigPrizeVo;
+import io.renren.modules.app.vo.ActivityConfigVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,7 +51,7 @@ public class ActivityConfigController {
      * 保存
      */
     @PostMapping("/save")
-    public R save(@RequestBody ConfigPrizeVo activityConfig){
+    public R save(@RequestBody ActivityConfigVo activityConfig){
 		activityConfigService.saveConfig(activityConfig);
 
         return R.ok();
@@ -75,6 +75,12 @@ public class ActivityConfigController {
 		activityConfigService.removeByIds(Arrays.asList(configIds));
 
         return R.ok();
+    }
+
+
+    @GetMapping("/detail/{activityId}")
+    public R getConfig(@PathVariable("activityId") Long activityId) {
+        return R.ok(200).put("data",activityConfigService.getConfig(activityId));
     }
 
 }

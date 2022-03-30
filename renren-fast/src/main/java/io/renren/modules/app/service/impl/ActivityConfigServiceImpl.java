@@ -9,7 +9,8 @@ import io.renren.modules.app.dao.ActivityConfigDao;
 import io.renren.modules.app.entity.ActivityConfigEntity;
 import io.renren.modules.app.service.ActivityConfigService;
 import io.renren.modules.app.service.ConfigPrizeService;
-import io.renren.modules.app.vo.ConfigPrizeVo;
+import io.renren.modules.app.vo.ActivityConfigVo;
+import io.renren.modules.app.vo.ConfigDetailVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,15 +38,20 @@ public class ActivityConfigServiceImpl extends ServiceImpl<ActivityConfigDao, Ac
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public void saveConfig(ConfigPrizeVo configPrizeVo) {
+    public void saveConfig(ActivityConfigVo activityConfigVo) {
         ActivityConfigEntity activityConfigEntity = new ActivityConfigEntity();
-        BeanUtils.copyProperties(configPrizeVo,activityConfigEntity);
+        BeanUtils.copyProperties(activityConfigVo,activityConfigEntity);
         this.save(activityConfigEntity);
-        configPrizeVo.getPrizeList().forEach(prizeConfig -> {
+        activityConfigVo.getPrizeList().forEach(prizeConfig -> {
             prizeConfig.setConfigId(activityConfigEntity.getConfigId());
 
         });
-        configPrizeService.saveBatch(configPrizeVo.getPrizeList());
+        configPrizeService.saveBatch(activityConfigVo.getPrizeList());
+    }
+
+    @Override
+    public ConfigDetailVo getConfig(Long activityId) {
+        return this.baseMapper.getConfig(activityId);
     }
 
 }

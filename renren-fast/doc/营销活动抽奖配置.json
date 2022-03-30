@@ -1,0 +1,14 @@
+{
+  "activityName":"营销活动抽奖",
+  "configId":1508652539967475714,
+  "activityStartTime":"2022-03-29 15:24:45",
+  "activityEndTime":"2022-03-30 15:24:45",
+  "participationLimit":0,
+  "participationNumber":0,
+  "participationTimes":1,
+  "participationTimeRefresh":0,
+  "participationCostType":1,
+  "participationCost":10,
+  "winNewsLimit":0,
+  "activityStatus": 0
+}

@@ -56,7 +56,9 @@ public class R extends HashMap<String, Object> {
 	public static R ok() {
 		return new R();
 	}
-
+	public static R ok(Integer code) {
+		return new R().put("code",code).put("success",true);
+	}
 	public R put(String key, Object value) {
 		super.put(key, value);
 		return this;

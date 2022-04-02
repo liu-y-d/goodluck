@@ -1,5 +1,6 @@
 package com.luck.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 /**
@@ -16,6 +17,8 @@ public class LotteryVo {
      */
     private Long activityId;
 
+    @JsonIgnore
+    private Long userId;
     /**
      * 抽取次数
      */

@@ -1,17 +1,16 @@
 package com.luck.services.impl;
 
 import com.luck.api.R;
+import com.luck.entity.CustomerIntegralEntity;
 import com.luck.feign.RenrenFeignClient;
 import com.luck.services.LotteryService;
+import com.luck.template.IDrawExec;
 import com.luck.utils.AuthUtil;
-import com.luck.vo.CustomerIntegralEntity;
+import com.luck.vo.LotteryResult;
 import com.luck.vo.LotteryVo;
 import com.luck.vo.LuckUser;
-import com.luck.vo.PrizeVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * 抽奖接口实现类
@@ -24,14 +23,18 @@ public class LotteryServiceImpl implements LotteryService {
 
     @Autowired
     private RenrenFeignClient renrenFeignClient;
+
+    @Autowired
+    private IDrawExec iDrawExec;
     @Override
-    public R<List<PrizeVo>> lottery(LotteryVo lotteryVo) {
+    public R<LotteryResult> lottery(LotteryVo lotteryVo) {
         // 获取当前登录对象
         LuckUser user = AuthUtil.getUser();
+        lotteryVo.setUserId(user.getCId());
         // 验证帐号积分
         R<CustomerIntegralEntity> info = renrenFeignClient.info(user.getCId());
-        // 获取相关抽奖策略
         // 进行抽奖
-        return null;
+        LotteryResult lotteryResult = iDrawExec.doDrawExec(lotteryVo);
+        return R.data(lotteryResult);
     }
 }

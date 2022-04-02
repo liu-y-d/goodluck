@@ -1,4 +1,4 @@
-package com.luck.vo;
+package com.luck.entity;
 
 import lombok.Data;
 

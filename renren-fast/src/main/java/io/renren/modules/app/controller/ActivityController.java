@@ -4,6 +4,7 @@ import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.R;
 import io.renren.modules.app.entity.ActivityEntity;
 import io.renren.modules.app.service.ActivityService;
+import io.renren.modules.app.vo.ActivityConfigVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,7 @@ public class ActivityController {
     @Autowired
     private ActivityService activityService;
 
+
     /**
      * 列表
      */
@@ -45,15 +47,6 @@ public class ActivityController {
         return R.ok().put("activity", activity);
     }
 
-    /**
-     * 保存
-     */
-    @PostMapping("/save")
-    public R save(@RequestBody ActivityEntity activity){
-		activityService.save(activity);
-
-        return R.ok();
-    }
 
     /**
      * 修改
@@ -73,6 +66,29 @@ public class ActivityController {
 		activityService.removeByIds(Arrays.asList(activityIds));
 
         return R.ok();
+    }
+    /**
+     * 保存
+     */
+    @PostMapping("/save")
+    public R save(@RequestBody ActivityConfigVo activityConfig){
+        activityService.saveConfig(activityConfig);
+
+        return R.ok();
+    }
+    @GetMapping("/detail/{activityId}")
+    public R getConfig(@PathVariable("activityId") Long activityId) {
+        return R.ok(200).put("data", activityService.getConfig(activityId));
+    }
+
+    @GetMapping("/deduct/stock")
+    public R deductStock(@RequestParam("activityId") Long activityId,@RequestParam("prizeId") Long prizeId) {
+        return R.ok(200).put("data", activityService.deductStock(activityId,prizeId));
+    }
+
+    @GetMapping("/nostock/{activityId}")
+    public R nostock(@PathVariable("activityId") Long activityId) {
+        return R.ok(200).put("data", activityService.noStock(activityId));
     }
 
 }

@@ -14,14 +14,14 @@ import java.math.BigDecimal;
  * @date 2022-03-28 11:37:59
  */
 @Data
-@TableName("config_prize")
-public class ConfigPrizeEntity implements Serializable {
+@TableName("activity_prize")
+public class ActivityPrizeEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 配置id
+	 * 活动id
 	 */
-	private Long configId;
+	private Long activityId;
 	/**
 	 * 奖品id
 	 */
@@ -30,10 +30,6 @@ public class ConfigPrizeEntity implements Serializable {
 	 * 奖品数量
 	 */
 	private Integer prizeNumber;
-	/**
-	 * 奖品概率限制 0 动态 1 固定
-	 */
-	private Integer prizeProbabilityFixed;
 	/**
 	 * 奖品概率
 	 */
@@ -46,5 +42,9 @@ public class ConfigPrizeEntity implements Serializable {
 	 * 奖品总数
 	 */
 	private Long prizeTotal;
+	/**
+	 * 奖品库存
+	 */
+	private Long prizeStock;
 
 }

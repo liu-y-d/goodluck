@@ -1,5 +1,6 @@
-package com.luck.vo;
+package io.renren.modules.app.vo;
 
+import io.renren.modules.app.entity.ActivityPrizeEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,6 +12,6 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ConfigPrizeVo extends ConfigPrizeEntity {
+public class ActivityPrizeVo extends ActivityPrizeEntity {
     private String prizeName;
 }

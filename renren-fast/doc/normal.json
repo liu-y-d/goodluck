@@ -1,0 +1,110 @@
+{
+  "activityName": "普通抽奖",
+  "activityStartTime": "2022-03-29 15:24:45",
+  "activityEndTime": "2022-03-30 15:24:45",
+  "participationLimit": 0,
+  "participationNumber": 0,
+  "participationTimes": 0,
+  "participationTimeRefresh": 0,
+  "participationCostType": 1,
+  "participationCost": 10,
+  "winNewsLimit": 0,
+  "activityStatus": 0,
+  "strategyType": 0,
+  "winPrizeNumber": 0,
+  "batchGet": 1,
+  "batchGetNumber": 5,
+  "defaultPrizeId":1508341140846280705,
+  "prizeList": [
+    {
+      "prizeId": 1508340681737764865,
+      "prizeNumber": 1,
+      "prizeProbabilityFixed": 1,
+      "prizeProbability": 0.01,
+      "prizeTotalLimit": 1,
+      "prizeTotal": 1,
+      "prizeStock":1
+    },
+    {
+      "prizeId": 1508340770896084993,
+      "prizeNumber": 1,
+      "prizeProbabilityFixed": 1,
+      "prizeProbability": 0.01,
+      "prizeTotalLimit": 1,
+      "prizeTotal": 1,
+      "prizeStock":1
+    },
+    {
+      "prizeId": 1508340886117810178,
+      "prizeNumber": 1,
+      "prizeProbabilityFixed": 1,
+      "prizeProbability": 0.03,
+      "prizeTotalLimit": 0,
+      "prizeTotal": 0,
+      "prizeStock":0
+    },
+    {
+      "prizeId": 1508340927012274177,
+      "prizeNumber": 1,
+      "prizeProbabilityFixed": 1,
+      "prizeProbability": 0.05,
+      "prizeTotalLimit": 0,
+      "prizeTotal": 0,
+      "prizeStock":0
+    },
+    {
+      "prizeId": 1508340977314562050,
+      "prizeNumber": 1,
+      "prizeProbabilityFixed": 1,
+      "prizeProbability": 0.1,
+      "prizeTotalLimit": 0,
+      "prizeTotal": 0,
+      "prizeStock":0
+    },
+    {
+      "prizeId": 1508341016300617729,
+      "prizeNumber": 1,
+      "prizeProbabilityFixed": 1,
+      "prizeProbability": 0.1,
+      "prizeTotalLimit": 0,
+      "prizeTotal": 0,
+      "prizeStock":0
+    },
+    {
+      "prizeId": 1508341055295062017,
+      "prizeNumber": 1,
+      "prizeProbabilityFixed": 1,
+      "prizeProbability": 0.2,
+      "prizeTotalLimit": 0,
+      "prizeTotal": 0,
+      "prizeStock":0
+    },
+    {
+      "prizeId": 1508341076090421250,
+      "prizeNumber": 1,
+      "prizeProbabilityFixed": 1,
+      "prizeProbability": 0.2,
+      "prizeTotalLimit": 0,
+      "prizeTotal": 0,
+      "prizeStock":0
+    },
+    {
+      "prizeId": 1508341140846280705,
+      "prizeNumber": 1,
+      "prizeProbabilityFixed": 1,
+      "prizeProbability": 0.2,
+      "prizeTotalLimit": 0,
+      "prizeTotal": 0,
+      "prizeStock":0
+    },
+    {
+      "prizeId": 1508344421672812546,
+      "prizeNumber": 1,
+      "prizeProbabilityFixed": 1,
+      "prizeProbability": 0.1,
+      "prizeTotalLimit": 0,
+      "prizeTotal": 0,
+      "prizeStock":0
+    }
+  ]
+}

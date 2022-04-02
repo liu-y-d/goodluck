@@ -1,7 +1,8 @@
 package io.renren.modules.app.vo;
 
-import io.renren.modules.app.entity.ActivityConfigEntity;
-import io.renren.modules.app.entity.ConfigPrizeEntity;
+
+import io.renren.modules.app.entity.ActivityEntity;
+import io.renren.modules.app.entity.ActivityPrizeEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,6 +16,6 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class ActivityConfigVo extends ActivityConfigEntity {
-    private List<ConfigPrizeEntity> prizeList;
+public class ActivityConfigVo extends ActivityEntity {
+    private List<ActivityPrizeEntity> prizeList;
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.app.dao.ActivityDao">
+
+    <resultMap id="ConfigDetailVo" type="io.renren.modules.app.vo.ActivityConfigDetailVo">
+        <result column = "activity_id" property="activityId"/>
+        <result column = "activity_name" property="activityName"/>
+        <result column = "activity_start_time" property="activityStartTime"/>
+        <result column = "activity_end_time" property="activityEndTime"/>
+        <result column = "participation_limit" property="participationLimit"/>
+        <result column = "participation_number" property="participationNumber"/>
+        <result column = "participation_times" property="participationTimes"/>
+        <result column = "participation_time_refresh" property="participationTimeRefresh"/>
+        <result column = "participation_cost_type" property="participationCostType"/>
+        <result column = "participation_cost" property="participationCost"/>
+        <result column = "win_news_limit" property="winNewsLimit"/>
+        <result column = "activity_status" property="activityStatus"/>
+        <result column = "strategy_type" property="strategyType"/>
+        <result column = "win_prize_number" property="winPrizeNumber"/>
+        <result column = "batch_get" property="batchGet"/>
+        <result column = "batch_get_number" property="batchGetNumber"/>
+        <result column = "default_prize_id" property="defaultPrizeId"/>
+
+
+
+        <collection property="prizeList" ofType="io.renren.modules.app.vo.ActivityPrizeVo">
+            <id column = "prize_id" property="prizeId"/>
+            <result column = "activity_id" property="activityId"/>
+            <result column = "prize_name" property="prizeName"/>
+            <result column = "prize_number" property="prizeNumber"/>
+            <result column = "prize_probability" property="prizeProbability"/>
+            <result column = "prize_total_limit" property="prizeTotalLimit"/>
+            <result column = "prize_total" property="prizeTotal"/>
+            <result column = "prize_stock" property="prizeStock"/>
+        </collection>
+    </resultMap>
+
+    <select id="getConfig" resultMap="ConfigDetailVo">
+        select activity.*,activity_prize.*,prize.*
+        from activity
+                 join activity_prize on activity.activity_id = activity_prize.activity_id
+                 join prize on activity_prize.prize_id = prize.prize_id
+        where activity.activity_id = #{activityId};
+    </select>
+    <select id="noStock" resultType="java.lang.Long" parameterType="java.lang.Long">
+        SELECT activity_prize.prize_id
+        FROM activity join activity_prize on activity.activity_id = activity_prize.activity_id
+        WHERE activity.activity_id = #{activityId}
+          AND prize_stock = 0
+          AND prize_total_limit = 1
+    </select>
+</mapper>

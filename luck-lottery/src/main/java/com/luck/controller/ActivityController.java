@@ -3,7 +3,7 @@ package com.luck.controller;
 import com.luck.api.R;
 import com.luck.feign.RenrenFeignClient;
 import com.luck.utils.PageUtils;
-import com.luck.vo.ConfigDetailVo;
+import com.luck.vo.ActivityConfigDetailVo;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,8 +29,8 @@ public class ActivityController {
         Map<String, Object> map = new HashMap<String, Object>(16);
         return renrenFeignClient.activityList(map);
     }
-    @GetMapping("/activity/config/{activityId}")
-    public R<ConfigDetailVo> getActivityList(@PathVariable("activityId") Long activityId) {
+    @GetMapping("/activity/{activityId}")
+    public R<ActivityConfigDetailVo> getActivityList(@PathVariable("activityId") Long activityId) {
         return renrenFeignClient.getConfig(activityId);
     }
 }

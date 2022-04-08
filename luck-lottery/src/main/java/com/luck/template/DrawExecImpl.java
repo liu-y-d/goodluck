@@ -2,6 +2,7 @@ package com.luck.template;
 
 import com.alibaba.fastjson.JSON;
 import com.luck.strategy.LotteryAlgorithmStrategy;
+import com.luck.vo.ActivityConfigDetailVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +25,9 @@ public class DrawExecImpl extends AbstractLotteryTemplate {
     }
 
     @Override
-    protected Long drawAlgorithm(Long activityId, LotteryAlgorithmStrategy lotteryStrategy, List<Long> excludeAwardIds, Long defaultPrizeId) {
+    protected Long drawAlgorithm(Long activityId, LotteryAlgorithmStrategy lotteryStrategy, List<Long> excludeAwardIds, ActivityConfigDetailVo activityConfig, Integer joinTimes) {
         // 执行抽奖
-        Long prizeId = lotteryStrategy.randomDraw(activityId, excludeAwardIds,defaultPrizeId);
+        Long prizeId = lotteryStrategy.randomDraw(activityId, excludeAwardIds,activityConfig, joinTimes);
 
         // 判断抽奖结果
         if (prizeId == null) {
@@ -41,6 +42,6 @@ public class DrawExecImpl extends AbstractLotteryTemplate {
         boolean isSuccess = (Boolean)this.client.deductStock(activityId, prizeId).getData();
 
         // 返回结果，库存扣减成功返回奖品ID，否则返回NULL（在实际的业务场景中，如果中奖奖品库存为空，则会发送兜底奖品，比如各类劵）
-        return isSuccess ? prizeId : defaultPrizeId;
+        return isSuccess ? prizeId : activityConfig.getDefaultPrizeId();
     }
 }

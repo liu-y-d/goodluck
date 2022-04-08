@@ -1,5 +1,6 @@
 package com.luck.strategy;
 
+import com.luck.vo.ActivityConfigDetailVo;
 import com.luck.vo.PrizeProbabilityInfo;
 
 import java.util.List;
@@ -47,8 +48,9 @@ public interface LotteryAlgorithmStrategy {
      *
      * @param activityId      活动id
      * @param excludeAwardIds 排除掉已经不能作为抽奖的奖品ID，留给风控和空库存使用
-     * @param defaultPrizeId  兜底奖品
+     * @param activityConfig  activityConfig
+     * @param joinTimes  参与次数
      * @return 中奖结果
      */
-    Long randomDraw(Long activityId, List<Long> excludeAwardIds, Long defaultPrizeId);
+    Long randomDraw(Long activityId, List<Long> excludeAwardIds, ActivityConfigDetailVo activityConfig, Integer joinTimes);
 }

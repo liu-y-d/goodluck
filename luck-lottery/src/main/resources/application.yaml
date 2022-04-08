@@ -36,4 +36,11 @@ spring:
 #logging:
 #  level:
 #    root: DEBUG
+feign:
+  client:
+    config:
+      default:
+        #不设置connectTimeout会导致readTimeout设置不生效
+        connectTimeout: 3000
+        readTimeout: 6000
 

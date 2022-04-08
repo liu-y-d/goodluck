@@ -1,12 +1,14 @@
 package com.luck.feign;
 
 import com.luck.api.R;
+import com.luck.entity.CustomerActivityDetailEntity;
+import com.luck.entity.CustomerIntegralEntity;
 import com.luck.utils.PageUtils;
 import com.luck.vo.ActivityConfigDetailVo;
-import com.luck.entity.CustomerIntegralEntity;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -33,4 +35,10 @@ public interface RenrenFeignClient {
 
     @GetMapping("/activity/nostock/{activityId}")
     R<List<Long>> nostock(@PathVariable("activityId") Long activityId);
+
+    @PostMapping("/customeractivitydetail/saveJoinDetail")
+    R<Boolean> saveJoinDetail(@RequestParam Map<String, Object> params);
+
+    @GetMapping(value = "/customeractivitydetail/joinActivityDetail", produces = "application/json;charset=utf-8")
+    R<List<CustomerActivityDetailEntity>> joinActivityDetail(@RequestParam Map<String, Object> params);
 }

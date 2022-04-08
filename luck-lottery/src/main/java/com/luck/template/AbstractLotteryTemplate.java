@@ -7,11 +7,14 @@ import com.luck.strategy.LotteryAlgorithmStrategy;
 import com.luck.strategy.LotteryStrategyFactory;
 import com.luck.vo.*;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 抽奖模版类
@@ -47,13 +50,23 @@ public abstract class AbstractLotteryTemplate implements IDrawExec {
                 batchGetNumber = data.getBatchGetNumber();
             }
         }
+        // 获取活动参与次数
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("activityId",data.getActivityId());
+        Integer joinTimes = client.joinActivityDetail(params).getData().size();
+
         List<Long> prizeIds = new ArrayList<>(batchGetNumber);
         for (int i = 1; i <= batchGetNumber; i++) {
             Long awardId = this.drawAlgorithm(lotteryRequest.getActivityId(), LotteryStrategyFactory.getLotteryStrategy(Constant.LotteryStrategyEnum.valueOf(data.getStrategyType()).getValue()),
-                    excludeAwardIds, data.getDefaultPrizeId());
+                    excludeAwardIds, data, joinTimes+i);
             prizeIds.add(awardId);
         }
+        // 参数清理
+        params.clear();
+        params.put("activityId",data.getActivityId());
+        params.put("prizeIds", StringUtils.join(prizeIds.toArray(), ","));
         // 4、记录抽奖信息
+        client.saveJoinDetail(params);
         // 5、包装中奖结果
         return buildDrawResult(lotteryRequest.getUserId(), lotteryRequest.getActivityId(), prizeIds);
     }
@@ -72,11 +85,12 @@ public abstract class AbstractLotteryTemplate implements IDrawExec {
      * @param activityId      活动id
      * @param lotteryStrategy   抽奖算法模型
      * @param excludeAwardIds 排除的抽奖id集合
-     * @param defaultPrizeId 兜底奖品
+     * @param activityConfig 活动配置
+     * @param joinTimes 参与次数
      * @return 中奖奖品ID
      */
     protected abstract Long drawAlgorithm(Long activityId, LotteryAlgorithmStrategy lotteryStrategy,
-                                            List<Long> excludeAwardIds, Long defaultPrizeId);
+                                            List<Long> excludeAwardIds, ActivityConfigDetailVo activityConfig , Integer joinTimes);
 
 
 
@@ -93,7 +107,7 @@ public abstract class AbstractLotteryTemplate implements IDrawExec {
         LotteryAlgorithmStrategy lotteryStrategy = LotteryStrategyFactory.getLotteryStrategy(Constant.LotteryStrategyEnum.valueOf(strategyMode).getValue());
         lotteryStrategy.initPrizeList(activityId, probabilityInfos);
         // 非简单概率，不必存入缓存
-        if (Constant.LotteryStrategyEnum.LOTTERY_STRATEGY_NORMAL.getCode() != strategyMode) {
+        if (Constant.LotteryStrategyEnum.LOTTERY_STRATEGY_DYNAMIC.getCode() == strategyMode) {
             return;
         }
         // 已初始化过的数据，不必重复初始化

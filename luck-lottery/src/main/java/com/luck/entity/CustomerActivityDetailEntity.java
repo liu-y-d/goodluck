@@ -1,4 +1,4 @@
-package io.renren.modules.app.entity;
+package com.luck.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;

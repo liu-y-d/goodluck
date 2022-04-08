@@ -1,20 +1,19 @@
 package io.renren.modules.app.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import io.renren.modules.app.entity.CustomerActivityDetailEntity;
-import io.renren.modules.app.service.CustomerActivityDetailService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.luck.utils.AuthUtil;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.R;
+import io.renren.modules.app.entity.CustomerActivityDetailEntity;
+import io.renren.modules.app.service.CustomerActivityDetailService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 
 
@@ -26,7 +25,7 @@ import io.renren.common.utils.R;
  * @date 2022-03-24 17:20:55
  */
 @RestController
-@RequestMapping("generator/customeractivitydetail")
+@RequestMapping("customeractivitydetail")
 public class CustomerActivityDetailController {
     @Autowired
     private CustomerActivityDetailService customerActivityDetailService;
@@ -34,8 +33,7 @@ public class CustomerActivityDetailController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
-    @RequiresPermissions("generator:customeractivitydetail:list")
+    @GetMapping("/list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = customerActivityDetailService.queryPage(params);
 
@@ -46,8 +44,7 @@ public class CustomerActivityDetailController {
     /**
      * 信息
      */
-    @RequestMapping("/info/{cId}")
-    @RequiresPermissions("generator:customeractivitydetail:info")
+    @GetMapping("/info/{cId}")
     public R info(@PathVariable("cId") Long cId){
 		CustomerActivityDetailEntity customerActivityDetail = customerActivityDetailService.getById(cId);
 
@@ -57,8 +54,7 @@ public class CustomerActivityDetailController {
     /**
      * 保存
      */
-    @RequestMapping("/save")
-    @RequiresPermissions("generator:customeractivitydetail:save")
+    @PostMapping("/save")
     public R save(@RequestBody CustomerActivityDetailEntity customerActivityDetail){
 		customerActivityDetailService.save(customerActivityDetail);
 
@@ -68,8 +64,7 @@ public class CustomerActivityDetailController {
     /**
      * 修改
      */
-    @RequestMapping("/update")
-    @RequiresPermissions("generator:customeractivitydetail:update")
+    @PostMapping("/update")
     public R update(@RequestBody CustomerActivityDetailEntity customerActivityDetail){
 		customerActivityDetailService.updateById(customerActivityDetail);
 
@@ -79,12 +74,34 @@ public class CustomerActivityDetailController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
-    @RequiresPermissions("generator:customeractivitydetail:delete")
+    @GetMapping("/delete")
     public R delete(@RequestBody Long[] cIds){
 		customerActivityDetailService.removeByIds(Arrays.asList(cIds));
 
         return R.ok();
     }
 
+
+    @PostMapping("/saveJoinDetail")
+    public R saveJoinDetail(@RequestParam Map<String, Object> params){
+        Long cId = AuthUtil.getUser().getCId();
+        List<String> prizeIds = Arrays.asList(((String) params.get("prizeIds")).split(","));
+        List<CustomerActivityDetailEntity> collect = prizeIds.stream().map(p -> {
+            CustomerActivityDetailEntity customerActivityDetailEntity = new CustomerActivityDetailEntity();
+            customerActivityDetailEntity.setCId(cId);
+            customerActivityDetailEntity.setActivityId(Long.valueOf((String) params.get("activityId")));
+            customerActivityDetailEntity.setPrizeId(Long.valueOf(p));
+            customerActivityDetailEntity.setJoinTime(new Date());
+            return customerActivityDetailEntity;
+        }).collect(Collectors.toList());
+        boolean flag = customerActivityDetailService.saveBatch(collect);
+        return R.ok(200).put("data",flag);
+    }
+    @GetMapping(value = "/joinActivityDetail" , produces = "application/json;charset=utf-8")
+    public R joinActivityDetail(@RequestParam Map<String, Object> params){
+        Long activityId = Long.valueOf((String) params.get("activityId"));
+        Long cId = AuthUtil.getUser().getCId();
+        List<CustomerActivityDetailEntity> value = customerActivityDetailService.getBaseMapper().selectList(new QueryWrapper<CustomerActivityDetailEntity>().eq("activity_id", activityId).eq("c_id", cId));
+        return R.ok(200).put("data", value);
+    }
 }

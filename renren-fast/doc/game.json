@@ -1,0 +1,59 @@
+{
+  "activityName": "累计10必中大奖（游戏）",
+  "activityStartTime": "2022-03-29 15:24:45",
+  "activityEndTime": "2022-03-30 15:24:45",
+  "participationLimit": 0,
+  "participationNumber": 0,
+  "participationTimes": 0,
+  "participationTimeRefresh": 0,
+  "participationCostType": 1,
+  "participationCost": 10,
+  "winNewsLimit": 0,
+  "activityStatus": 0,
+  "strategyType": 1,
+  "winPrizeNumber": 10,
+  "batchGet": 1,
+  "batchGetNumber": 5,
+  "defaultPrizeId":1508341140846280705,
+  "prizeList":[{
+    "prizeId":1508695822328434690,
+    "prizeNumber":1,
+    "prizeProbabilityFixed":1,
+    "prizeProbability":0.04,
+    "prizeTotalLimit":0,
+    "prizeTotal":0,
+    "prizeStock":0
+  },{
+    "prizeId":1508695851051028481,
+    "prizeNumber":1,
+    "prizeProbabilityFixed":1,
+    "prizeProbability":0.1,
+    "prizeTotalLimit":0,
+    "prizeTotal":0,
+    "prizeStock":0
+  },{
+    "prizeId":1508695889378578433,
+    "prizeNumber":1,
+    "prizeProbabilityFixed":1,
+    "prizeProbability":0.3,
+    "prizeTotalLimit":0,
+    "prizeTotal":0,
+    "prizeStock":0
+  },{
+    "prizeId":1508695962162335745,
+    "prizeNumber":1,
+    "prizeProbabilityFixed":1,
+    "prizeProbability":0.4,
+    "prizeTotalLimit":0,
+    "prizeTotal":0,
+    "prizeStock":0
+  },{
+    "prizeId":1508696153116413953,
+    "prizeNumber":1,
+    "prizeProbabilityFixed":1,
+    "prizeProbability":0.16,
+    "prizeTotalLimit":0,
+    "prizeTotal":0,
+    "prizeStock":0
+  }]
+}

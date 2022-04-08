@@ -1,6 +1,7 @@
 package com.luck.strategy;
 
 import com.luck.constant.Constant;
+import com.luck.vo.ActivityConfigDetailVo;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +21,7 @@ public class NormalLotteryStrategy extends BaseLotteryAlgorithmStrategy implemen
     }
 
     @Override
-    public Long randomDraw(Long activityId, List<Long> excludeAwardIds, Long defaultPrizeId) {
+    public Long randomDraw(Long activityId, List<Long> excludeAwardIds, ActivityConfigDetailVo activityConfig, Integer joinTimes) {
         // 获取策略对应的元组
         Long[] rateTuple = super.rateTupleMap.get(activityId);
         assert rateTuple != null;
@@ -31,7 +32,7 @@ public class NormalLotteryStrategy extends BaseLotteryAlgorithmStrategy implemen
         // 返回结果
         Long prizeId = rateTuple[idx];
         if (excludeAwardIds.contains(prizeId)) {
-            return defaultPrizeId;
+            return activityConfig.getDefaultPrizeId();
         }
 
         return prizeId;

@@ -1,6 +1,7 @@
 package com.luck.strategy;
 
 import com.luck.constant.Constant;
+import com.luck.vo.ActivityConfigDetailVo;
 import com.luck.vo.PrizeProbabilityInfo;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
@@ -24,7 +25,7 @@ public class DynamicLotteryStrategy  extends BaseLotteryAlgorithmStrategy implem
     }
 
     @Override
-    public Long randomDraw(Long activityId, List<Long> excludeAwardIds, Long defaultPrizeId) {
+    public Long randomDraw(Long activityId, List<Long> excludeAwardIds, ActivityConfigDetailVo activityConfig, Integer joinTimes) {
 
         BigDecimal differenceDenominator = BigDecimal.ZERO;
 

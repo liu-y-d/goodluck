@@ -36,8 +36,9 @@ spring:
   freemarker:
     suffix: .html
     template-loader-path: classpath:/templates
+    cache: false
   mvc:
-    static-path-pattern: classpath:/static/**
+    static-path-pattern: /static/**
 #logging:
 #  level:
 #    root: DEBUG

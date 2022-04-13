@@ -1,8 +1,8 @@
 package com.luck.controller;
 
 import com.luck.api.R;
+import com.luck.entity.ActivityEntity;
 import com.luck.feign.RenrenFeignClient;
-import com.luck.utils.PageUtils;
 import com.luck.vo.ActivityConfigDetailVo;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,9 +26,8 @@ import java.util.Map;
 public class ActivityController {
     private final RenrenFeignClient renrenFeignClient;
     @GetMapping("/activity/list")
-    public R<PageUtils> getActivityList() {
-        Map<String, Object> map = new HashMap<String, Object>(16);
-        return renrenFeignClient.activityList(map);
+    public R<List<ActivityEntity>> getActivityList() {
+        return renrenFeignClient.activityList();
     }
     @GetMapping("/activity/{activityId}")
     public R<ActivityConfigDetailVo> getActivityList(@PathVariable("activityId") Long activityId) {

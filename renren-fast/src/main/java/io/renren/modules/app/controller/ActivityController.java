@@ -1,5 +1,7 @@
 package io.renren.modules.app.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.R;
 import io.renren.modules.app.entity.ActivityEntity;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
@@ -30,10 +33,15 @@ public class ActivityController {
     /**
      * 列表
      */
-    @GetMapping("/list")
-    public R list(@RequestParam Map<String, Object> params){
+    @GetMapping("/page")
+    public R page(@RequestParam Map<String, Object> params){
         PageUtils page = activityService.queryPage(params);
         return R.ok(200).put("data", page);
+    }
+    @GetMapping("/list")
+    public R page(){
+        List<ActivityEntity> value = activityService.getBaseMapper().selectList(new QueryWrapper<ActivityEntity>());
+        return R.ok(200).put("data", value);
     }
 
 

@@ -14,16 +14,24 @@ import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.http.HttpCookie;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
 
 /**
  * 鉴权认证
@@ -129,5 +137,25 @@ public class AuthFilter implements GlobalFilter, Ordered {
    public int getOrder() {
       return -100;
    }
+   /**
+    * 设置向后传递的header
+    *
+    * @param chain
+    * @param exchange
+    * @param headerMap
+    */
+   private Mono<Void> chainFilterAndSetHeaders(GatewayFilterChain chain, ServerWebExchange exchange, LinkedHashMap<String, String> headerMap) {
+      // 添加header
+      Consumer<HttpHeaders> httpHeaders = httpHeader -> {
+         for (Map.Entry<String, String> entry : headerMap.entrySet()) {
+            // 遍历Map设置header，向后传递
+            httpHeader.set(entry.getKey(), entry.getValue());
+         }
+      };
 
+      ServerHttpRequest newRequest = exchange.getRequest().mutate().headers(httpHeaders).build();
+      ServerWebExchange build = exchange.mutate().request(newRequest).build();
+      //将现在的request 变成 exchange对象
+      return chain.filter(build);
+   }
 }

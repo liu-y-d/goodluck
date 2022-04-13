@@ -281,3 +281,93 @@ create table prize
 
 
 
+use renren
+go
+
+create table crm_client
+(
+    ID                    bigint                    not null
+        constraint PK_qm_client
+            primary key,
+    ClientId              varchar(50)               not null,
+    ClientSecret          varchar(256)              not null,
+    ResourceIds           varchar(256),
+    Scope                 varchar(100)              not null,
+    AuthorizedGrantTypes  varchar(256)              not null,
+    WebServerRedirectURI  varchar(256),
+    Authorities           varchar(256),
+    AccessTokenValidity   int                       not null,
+    RefreshTokenValidity  int                       not null,
+    AdditionalInformation varchar(4096),
+    AutoApprove           varchar(256),
+    CreateTime            datetime
+        constraint DF_qm_client_CreateTime default getdate(),
+    UpdateTime            datetime
+        constraint DF_qm_client_UpdateTime default getdate(),
+    Status                tinyint
+        constraint DF_qm_client_Status default 0    not null,
+    IsDeleted             tinyint
+        constraint DF_qm_client_IsDeleted default 0 not null
+)
+    go
+
+exec sp_addextendedproperty 'MS_Description', '认证客户端表', 'SCHEMA', 'dbo', 'TABLE', 'crm_client'
+go
+
+exec sp_addextendedproperty 'MS_Description', '主键', 'SCHEMA', 'dbo', 'TABLE', 'crm_client', 'COLUMN', 'ID'
+go
+
+exec sp_addextendedproperty 'MS_Description', '客户端ID', 'SCHEMA', 'dbo', 'TABLE', 'crm_client', 'COLUMN', 'ClientId'
+go
+
+exec sp_addextendedproperty 'MS_Description', '客户端密钥', 'SCHEMA', 'dbo', 'TABLE', 'crm_client', 'COLUMN', 'ClientSecret'
+go
+
+exec sp_addextendedproperty 'MS_Description', '资源集合', 'SCHEMA', 'dbo', 'TABLE', 'crm_client', 'COLUMN', 'ResourceIds'
+go
+
+exec sp_addextendedproperty 'MS_Description', '授权范围', 'SCHEMA', 'dbo', 'TABLE', 'crm_client', 'COLUMN', 'Scope'
+go
+
+exec sp_addextendedproperty 'MS_Description', '授权类型', 'SCHEMA', 'dbo', 'TABLE', 'crm_client', 'COLUMN',
+     'AuthorizedGrantTypes'
+go
+
+exec sp_addextendedproperty 'MS_Description', '回调地址', 'SCHEMA', 'dbo', 'TABLE', 'crm_client', 'COLUMN',
+     'WebServerRedirectURI'
+go
+
+exec sp_addextendedproperty 'MS_Description', '权限', 'SCHEMA', 'dbo', 'TABLE', 'crm_client', 'COLUMN', 'Authorities'
+go
+
+exec sp_addextendedproperty 'MS_Description', '令牌过期秒数', 'SCHEMA', 'dbo', 'TABLE', 'crm_client', 'COLUMN',
+     'AccessTokenValidity'
+go
+
+exec sp_addextendedproperty 'MS_Description', '刷新令牌过期秒数', 'SCHEMA', 'dbo', 'TABLE', 'crm_client', 'COLUMN',
+     'RefreshTokenValidity'
+go
+
+exec sp_addextendedproperty 'MS_Description', '附加说明', 'SCHEMA', 'dbo', 'TABLE', 'crm_client', 'COLUMN',
+     'AdditionalInformation'
+go
+
+exec sp_addextendedproperty 'MS_Description', '自动授权', 'SCHEMA', 'dbo', 'TABLE', 'crm_client', 'COLUMN', 'AutoApprove'
+go
+
+exec sp_addextendedproperty 'MS_Description', '创建时间', 'SCHEMA', 'dbo', 'TABLE', 'crm_client', 'COLUMN', 'CreateTime'
+go
+
+exec sp_addextendedproperty 'MS_Description', '更新时间', 'SCHEMA', 'dbo', 'TABLE', 'crm_client', 'COLUMN', 'UpdateTime'
+go
+
+exec sp_addextendedproperty 'MS_Description', '业务状态，0正常，1不正常', 'SCHEMA', 'dbo', 'TABLE', 'crm_client', 'COLUMN',
+     'Status'
+go
+
+exec sp_addextendedproperty 'MS_Description', '删除状态，0未删除，1已删除', 'SCHEMA', 'dbo', 'TABLE', 'crm_client', 'COLUMN',
+     'IsDeleted'
+go
+
+
+INSERT INTO renren.dbo.crm_client (ID, ClientId, ClientSecret, ResourceIds, Scope, AuthorizedGrantTypes, WebServerRedirectURI, Authorities, AccessTokenValidity, RefreshTokenValidity, AdditionalInformation, AutoApprove, CreateTime, UpdateTime, Status, IsDeleted) VALUES (1123598811738675201, N'luck', N'luck_secret', null, N'all', N'refresh_token,password,authorization_code,captcha', N'http://localhost:8080', null, 3600, 604800, null, null, N'2022-03-30 13:03:55.470', N'2022-03-30 13:03:55.470', 0, 0);

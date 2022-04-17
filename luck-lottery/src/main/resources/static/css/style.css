@@ -584,13 +584,15 @@ a:hover, a:active {
 
 .course-date {
     position: relative;
-    padding-left: 10px;
+    /*padding-left: 10px;*/
     margin-left: 5px;
+    /*padding-right: 10px;*/
+    margin-right: 5px;
     color: #757686;
 }
 
 .course-date::before {
-    content: '/';
+    /*content: '/';*/
     position: absolute;
     top: 0;
     left: 0;

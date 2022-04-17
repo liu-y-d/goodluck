@@ -36,13 +36,13 @@
                     <div class="col-12 col-lg-12 d-flex flex-wrap justify-content-center justify-content-lg-end align-items-center">
                         <div class="header-bar-search">
                             <form class="flex align-items-stretch">
-                                <input type="search" placeholder="What would you like to learn?">
+                                <input type="search" placeholder="活动类型、活动名称">
                                 <button type="submit" value="" class="flex justify-content-center align-items-center"><i class="fa fa-search"></i></button>
                             </form>
                         </div><!-- .header-bar-search -->
 
                         <div class="header-bar-menu">
-                            <span style="margin-left: 20px;">云达</span>
+                            <span style="margin-left: 20px;" id="userName"></span>
                         </div><!-- .header-bar-menu -->
                     </div><!-- .col -->
                 </div><!-- .row -->
@@ -62,20 +62,62 @@
         <div class="row mx-m-25">
             <div class="col-12 px-25">
                 <header class="heading flex flex-wrap justify-content-between align-items-center">
-                    <h2 class="entry-title">Featured Courses</h2>
+                    <h2 class="entry-title">精选活动</h2>
 
                     <nav class="courses-menu mt-3 mt-lg-0">
                         <ul class="flex flex-wrap justify-content-md-end align-items-center">
-                            <li class="active"><a href="#">All</a></li>
-                            <li><a href="#">Business</a></li>
-                            <li><a href="#">Design</a></li>
-                            <li><a href="#">Web Development</a></li>
-                            <li><a href="#">Photography</a></li>
+                            <li class="active"><a href="#">全部</a></li>
+                            <li><a href="#">活动类型1</a></li>
+                            <li><a href="#">活动类型2</a></li>
+                            <li><a href="#">活动类型3</a></li>
+                            <li><a href="#">活动类型4</a></li>
                         </ul>
                     </nav><!-- .courses-menu -->
                 </header><!-- .heading -->
             </div><!-- .col -->
+            <#list activityList as activity>
+                <div class="col-12 col-md-6 col-lg-4 px-25">
+                    <div class="course-content">
+                        <figure class="course-thumbnail">
+                            <a href="#"><img src="../static/images/1.jpg" alt=""></a>
+                        </figure><!-- .course-thumbnail -->
 
+                        <div class="course-content-wrap">
+                            <header class="entry-header">
+                                <h2 class="entry-title"><a href="#">${activity.activityName}</a></h2>
+
+                                <div class="entry-meta flex align-items-center">
+                                    <#--<div class="course-author"><a href="#">Ms. Lara Croft </a></div>-->
+
+                                    <div class="course-date">开始时间：<br>${activity.activityStartTime}</div>
+                                    <div class="course-date">结束时间：<br>${activity.activityEndTime}</div>
+                                </div><!-- .course-date -->
+                            </header><!-- .entry-header -->
+
+                            <footer class="entry-footer flex justify-content-between align-items-center">
+                                    <div class="course-cost">
+                                        <#--无成本-免费-->
+                                        <#if activity.participationCostType == 0>
+                                            <span class="free-cost">Free</span>
+                                        <#--积分-->
+                                        <#elseif activity.participationCostType == 1>
+                                            积分：${activity.participationCost}
+                                            <#--<span class="price-drop">$68</span>-->
+                                        </#if>
+                                    </div><!-- .course-cost -->
+
+
+                                <#--抽多少次必中大奖-->
+                                <#if activity.strategyType == 1>
+                                    <div class="course-ratings flex justify-content-end align-items-center">
+                                        参与${activity.winPrizeNumber}次必中大奖！
+                                    </div
+                                </#if>
+                            </footer><!-- .entry-footer -->
+                        </div><!-- .course-content-wrap -->
+                    </div><!-- .course-content -->
+                </div><!-- .col -->
+            </#list>
             <div class="col-12 col-md-6 col-lg-4 px-25">
                 <div class="course-content">
                     <figure class="course-thumbnail">
@@ -87,18 +129,23 @@
                             <h2 class="entry-title"><a href="#">The Complete Android Developer Course</a></h2>
 
                             <div class="entry-meta flex align-items-center">
-                                <div class="course-author"><a href="#">Ms. Lara Croft </a></div>
+                                <#--<div class="course-author"><a href="#">Ms. Lara Croft </a></div>-->
+                                <div class="course-date">开始时间：<br>2021-12-07 24:00:00</div>
 
-                                <div class="course-date">July 21, 2018</div>
+                                <div class="course-date">结束时间：<br>2021-12-07 24:00:00</div>
                             </div><!-- .course-date -->
                         </header><!-- .entry-header -->
 
                         <footer class="entry-footer flex justify-content-between align-items-center">
                             <div class="course-cost">
-                                $45 <span class="price-drop">$68</span>
+                                $45
+                                <#--<span class="price-drop">$68</span>-->
                             </div><!-- .course-cost -->
 
                             <div class="course-ratings flex justify-content-end align-items-center">
+                                参与<span style="color: red">10</span>次必中大奖！
+                            </div>
+                            <#--<div class="course-ratings flex justify-content-end align-items-center">
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
@@ -106,7 +153,7 @@
                                 <span class="fa fa-star-o"></span>
 
                                 <span class="course-ratings-count">(4 votes)</span>
-                            </div><!-- .course-ratings -->
+                            </div>--><!-- .course-ratings -->
                         </footer><!-- .entry-footer -->
                     </div><!-- .course-content-wrap -->
                 </div><!-- .course-content -->
@@ -293,7 +340,7 @@
             </div><!-- .col -->
 
             <div class="col-12 px-25 flex justify-content-center">
-                <a class="btn" href="#">view all courses</a>
+                <a class="btn" href="#">查看所有活动</a>
             </div><!-- .col -->
         </div><!-- .row -->
     </div><!-- .container -->
@@ -303,5 +350,9 @@
 <script type='text/javascript' src='../static/js/masonry.pkgd.min.js'></script>
 <script type='text/javascript' src='../static/js/jquery.collapsible.min.js'></script>
 <script type='text/javascript' src='../static/js/custom.js'></script>
+<script src="../static/jquery-3.6.0.min.js"></script>
+<script src="../static/jquery.cookie.js"></script>
+<script type='text/javascript' src='../static/common/common.js'></script>
+<script type='text/javascript' src='../static/common/activity.js'></script>
 </body>
 </html>

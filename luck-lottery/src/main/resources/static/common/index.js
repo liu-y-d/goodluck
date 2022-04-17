@@ -33,6 +33,8 @@ function login() {
         data: JSON.stringify(loginParams),
         success:function (data,state) {
             $.cookie("Luck-Auth",data.access_token,{ path: '/', expires: new Date().getTime() + (24 * 60 * 60 * 1000) })
+            debugger
+            $.cookie("Current-User",JSON.stringify(data),{ path: '/', expires: new Date().getTime() + (24 * 60 * 60 * 1000) })
             commonHeaders["Luck-Auth"] = data.access_token;
             //去活动首页
             location.href="http://localhost:88/luck-lottery/web/activity";

@@ -12,3 +12,17 @@ var commonHeaders = {
     "Access-Control-Allow-Headers":"x-requested-with,content-type",
     "Content-Type":"application/json;charset=utf-8"
 }
+$(function () {
+    // 判断是否登录
+    if (window.location.href.indexOf("/luck-lottery/web/index")<=0) {
+
+        let luckAuth = $.cookie('Luck-Auth');
+        if (!luckAuth) {
+            window.location.href="/luck-lottery/web/index";
+        }
+    }
+    // 设置用户名
+    let currentUserJSON = $.cookie('Current-User');
+    let currentUser = JSON.parse(currentUserJSON);
+    $("#userName").text(currentUser.user_name);
+})

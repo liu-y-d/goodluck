@@ -33,7 +33,6 @@ public class IndexController {
     }
     @GetMapping("/activity")
     public String go(Model model){
-        LuckUser user = AuthUtil.getUser();
         R<List<ActivityEntity>> listR = renrenFeignClient.activityList();
         model.addAttribute("activityList",listR.getData());
         return "activity";

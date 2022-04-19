@@ -371,3 +371,16 @@ go
 
 
 INSERT INTO renren.dbo.crm_client (ID, ClientId, ClientSecret, ResourceIds, Scope, AuthorizedGrantTypes, WebServerRedirectURI, Authorities, AccessTokenValidity, RefreshTokenValidity, AdditionalInformation, AutoApprove, CreateTime, UpdateTime, Status, IsDeleted) VALUES (1123598811738675201, N'luck', N'luck_secret', null, N'all', N'refresh_token,password,authorization_code,captcha', N'http://localhost:8080', null, 3600, 604800, null, null, N'2022-03-30 13:03:55.470', N'2022-03-30 13:03:55.470', 0, 0);
+
+
+
+INSERT INTO renren.dbo.prize (prize_id, prize_name) VALUES (0, N'默认的奖品啥也不是');
+INSERT INTO renren.dbo.prize (prize_id, prize_name) VALUES (1508340681737764865, N'macBook');
+INSERT INTO renren.dbo.prize (prize_id, prize_name) VALUES (1508340770896084993, N'iphone');
+INSERT INTO renren.dbo.prize (prize_id, prize_name) VALUES (1508340886117810178, N'10元红包');
+INSERT INTO renren.dbo.prize (prize_id, prize_name) VALUES (1508340927012274177, N'xx优惠券');
+INSERT INTO renren.dbo.prize (prize_id, prize_name) VALUES (1508340977314562050, N'xx体验卡');
+INSERT INTO renren.dbo.prize (prize_id, prize_name) VALUES (1508341016300617729, N'30积分');
+INSERT INTO renren.dbo.prize (prize_id, prize_name) VALUES (1508341055295062017, N'20积分');
+INSERT INTO renren.dbo.prize (prize_id, prize_name) VALUES (1508341076090421250, N'10积分');
+INSERT INTO renren.dbo.prize (prize_id, prize_name) VALUES (1508341140846280705, N'谢谢参与');

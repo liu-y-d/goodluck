@@ -1,7 +1,7 @@
 $(function () {
     let LuckAuth = $.cookie("Luck-Auth");
     if (LuckAuth) {
-        location.href="http://localhost:88/luck-lottery/web/activity";
+        location.href="http://"+localIp+":88/luck-lottery/web/activity";
     }
 
 })

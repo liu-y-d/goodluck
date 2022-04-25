@@ -84,7 +84,7 @@
 
                         <div class="course-content-wrap">
                             <header class="entry-header">
-                                <h2 class="entry-title"><a href="#">${activity.activityName}</a></h2>
+                                <h2 class="entry-title"><a href="activityConfig?activityId=${activity.activityId?c}">${activity.activityName}</a></h2>
 
                                 <div class="entry-meta flex align-items-center">
                                     <#--<div class="course-author"><a href="#">Ms. Lara Croft </a></div>-->
@@ -110,7 +110,7 @@
                                 <#--抽多少次必中大奖-->
                                 <#if activity.strategyType == 1>
                                     <div class="course-ratings flex justify-content-end align-items-center">
-                                        参与${activity.winPrizeNumber}次必中大奖！
+                                        参与<span style="color: red">${activity.winPrizeNumber}</span>次必中大奖！
                                     </div
                                 </#if>
                             </footer><!-- .entry-footer -->

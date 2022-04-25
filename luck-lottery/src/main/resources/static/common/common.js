@@ -12,6 +12,11 @@ var commonHeaders = {
     "Access-Control-Allow-Headers":"x-requested-with,content-type",
     "Content-Type":"application/json;charset=utf-8"
 }
+/**
+ * 服务器本地ip
+ * @type {string}
+ */
+var localIp = "192.168.1.100";
 $(function () {
     // 判断是否登录
     if (window.location.href.indexOf("/luck-lottery/web/index")<=0) {

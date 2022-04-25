@@ -89,8 +89,8 @@
                                 <div class="entry-meta flex align-items-center">
                                     <#--<div class="course-author"><a href="#">Ms. Lara Croft </a></div>-->
 
-                                    <div class="course-date">开始时间：<br>${activity.activityStartTime}</div>
-                                    <div class="course-date">结束时间：<br>${activity.activityEndTime}</div>
+                                    <div class="course-date">开始时间：<br>${activity.activityStartTime?string("yyyy-MM-dd HH:mm:ss")}</div>
+                                    <div class="course-date">结束时间：<br>${activity.activityEndTime?string("yyyy-MM-dd HH:mm:ss")}</div>
                                 </div><!-- .course-date -->
                             </header><!-- .entry-header -->
 

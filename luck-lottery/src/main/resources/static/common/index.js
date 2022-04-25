@@ -24,7 +24,7 @@ function login() {
     }
     debugger
     $.ajax({
-        url:"http://localhost:88/luck-auth/oauth/token",
+        url:"http://"+localIp+":88/luck-auth/oauth/token",
         type:"post",
         dataType: "json",
         contentType:"application/json",
@@ -37,10 +37,13 @@ function login() {
             $.cookie("Current-User",JSON.stringify(data),{ path: '/', expires: new Date().getTime() + (24 * 60 * 60 * 1000) })
             commonHeaders["Luck-Auth"] = data.access_token;
             //去活动首页
-            location.href="http://localhost:88/luck-lottery/web/activity";
+            location.href="http://"+localIp+":88/luck-lottery/web/activity";
         },
-        error:function () {
-            alert("帐号或密码错误！")
+        error:function (state) {
+            alert(state.responseText+"帐号或密码错误1111！");
+            alert(state.status+"帐号或密码错误1111！");
+            alert(state.statusText+"帐号或密码错误1111！");
+            alert(state.responseText+"帐号或密码错误1111！");
         }
     })
 }

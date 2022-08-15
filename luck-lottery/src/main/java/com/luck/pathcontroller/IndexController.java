@@ -6,13 +6,13 @@ import com.luck.feign.RenrenFeignClient;
 import com.luck.utils.AuthUtil;
 import com.luck.utils.PageUtils;
 import com.luck.vo.ActivityConfigDetailVo;
+import com.luck.vo.LotteryResult;
+import com.luck.vo.LotteryVo;
 import com.luck.vo.LuckUser;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.websocket.server.PathParam;

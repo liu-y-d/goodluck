@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * 抽奖控制器
  *
@@ -27,6 +29,18 @@ public class LotteryController {
     public R<LotteryResult> lottery(@RequestBody LotteryVo lotteryVo) {
         return lotteryService.lottery(lotteryVo);
     }
+    @PostMapping("/lotteryShuffle/get")
+    public R<LotteryResult> lotteryShuffle(@RequestBody LotteryVo lotteryVo) {
+        return lotteryService.lotteryShuffle(lotteryVo);
+    }
 
 
+    @PostMapping("/lottery/getResult")
+    public R<LotteryResult> getResult(@RequestBody LotteryVo lotteryVo) {
+        return lotteryService.getResult(lotteryVo);
+    }
+    @PostMapping("/lotteryShuffle/getResult")
+    public R<List<LotteryResult>> lotteryShuffleGetResult(@RequestBody LotteryVo lotteryVo) {
+        return lotteryService.lotteryShuffleGetResult(lotteryVo);
+    }
 }

@@ -2718,3 +2718,7 @@ p.footer-copyright {
 .footer-bar-nav ul li a:hover {
     color: #34d986;
 }
+
+#loading { position:fixed;left:0;top:0;width:100%;height:100%; z-index:2000;background:rgba(0,0,0,0.6);display:none;}
+#loading .cont {width:100px;height:50px;text-align:center;position:fixed;left:50%;top:50%;margin-left:-50px;margin-top:-25px;border-radius:5px;-webkit-border-radius:5px;}
+#loading .cont img {margin-top:10px;}

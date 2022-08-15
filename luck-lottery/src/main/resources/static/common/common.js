@@ -16,7 +16,7 @@ var commonHeaders = {
  * 服务器本地ip
  * @type {string}
  */
-var localIp = "192.168.0.101";
+var localIp = "192.168.1.67";
 $(function () {
     // 判断是否登录
     if (window.location.href.indexOf("/luck-lottery/web/index")<=0) {

@@ -40,10 +40,7 @@ function login() {
             location.href="http://"+localIp+":88/luck-lottery/web/activity";
         },
         error:function (state) {
-            alert(state.responseText+"帐号或密码错误1111！");
-            alert(state.status+"帐号或密码错误1111！");
-            alert(state.statusText+"帐号或密码错误1111！");
-            alert(state.responseText+"帐号或密码错误1111！");
+            alert("帐号或密码错误！");
         }
     })
 }

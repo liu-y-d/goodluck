@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.R;
+import io.renren.modules.app.dao.ConfigPrizeDao;
 import io.renren.modules.app.entity.ActivityEntity;
+import io.renren.modules.app.entity.ActivityPrizeVO;
 import io.renren.modules.app.service.ActivityService;
+import io.renren.modules.app.service.StockService;
 import io.renren.modules.app.vo.ActivityConfigVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +31,12 @@ import java.util.Map;
 public class ActivityController {
     @Autowired
     private ActivityService activityService;
+
+    @Autowired
+    private StockService stockService;
+
+    @Autowired
+    private ConfigPrizeDao configPrizeDao;
 
 
     /**
@@ -91,12 +100,30 @@ public class ActivityController {
 
     @GetMapping("/deduct/stock")
     public R deductStock(@RequestParam("activityId") Long activityId,@RequestParam("prizeId") Long prizeId) {
-        return R.ok(200).put("data", activityService.deductStock(activityId,prizeId));
+        String key = "luck_stock:"+"activityId:"+activityId+",prizeId:"+prizeId;
+        long stock = stockService.stock(key, 60 * 60, 1, (a, b) -> {
+            return activityService.getStock(activityId, prizeId);
+        });
+        return R.ok(200).put("data", stock);
+    }
+
+    @GetMapping("/update/stock")
+    public R updateStock(@RequestParam("activityId") Long activityId,@RequestParam("prizeId") Long prizeId) {
+        return R.ok(200).put("data", activityService.updateStock(activityId,prizeId));
     }
 
     @GetMapping("/nostock/{activityId}")
     public R nostock(@PathVariable("activityId") Long activityId) {
         return R.ok(200).put("data", activityService.noStock(activityId));
+    }
+
+    @PostMapping("/addstock")
+    public R stop(@RequestBody List<ActivityPrizeVO> activityPrizeVOS) {
+        return R.ok(200).put("data", activityService.addStock(activityPrizeVOS));
+    }
+    @GetMapping("/resetStock")
+    public R resetStock(@RequestParam("activityId")Long activityId) {
+        return R.ok(200).put("data", configPrizeDao.resetStock(activityId));
     }
 
 }

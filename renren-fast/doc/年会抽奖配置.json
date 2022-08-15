@@ -1,0 +1,53 @@
+{
+  "activityName": "年会抽奖",
+  "activityStartTime": "2022-03-29 15:24:45",
+  "activityEndTime": "2022-03-30 15:24:45",
+  "participationLimit": 1,
+  "participationNumber": 7,
+  "participationTimes": 0,
+  "participationTimeRefresh": 0,
+  "participationCostType": 0,
+  "participationCost": 0,
+  "winNewsLimit": 1,
+  "activityStatus": 0,
+  "strategyType": 3,
+  "winPrizeNumber": 0,
+  "batchGet": 0,
+  "batchGetNumber": 0,
+  "defaultPrizeId":0,
+  "controller":1,
+  "customer": "2,3,4,5,6,7,8",
+  "prizeList":[{
+    "prizeId":1508340681737764865,
+    "prizeNumber":1,
+    "prizeProbabilityFixed":1,
+    "prizeProbability":0,
+    "prizeTotalLimit":1,
+    "prizeTotal":1,
+    "prizeStock":1
+  },{
+    "prizeId":1508340770896084993,
+    "prizeNumber":1,
+    "prizeProbabilityFixed":1,
+    "prizeProbability":0,
+    "prizeTotalLimit":1,
+    "prizeTotal":2,
+    "prizeStock":2
+  },{
+    "prizeId":1534913255539326978,
+    "prizeNumber":1,
+    "prizeProbabilityFixed":1,
+    "prizeProbability":0,
+    "prizeTotalLimit":1,
+    "prizeTotal":2,
+    "prizeStock":2
+  },{
+    "prizeId":1534913407113084929,
+    "prizeNumber":1,
+    "prizeProbabilityFixed":1,
+    "prizeProbability":0,
+    "prizeTotalLimit":1,
+    "prizeTotal":2,
+    "prizeStock":2
+  }]
+}

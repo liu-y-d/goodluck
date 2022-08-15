@@ -3,35 +3,38 @@ package com.luck.template;
 import com.luck.api.R;
 import com.luck.constant.Constant;
 import com.luck.feign.RenrenFeignClient;
+import com.luck.rabbitmq.MQSender;
 import com.luck.strategy.LotteryAlgorithmStrategy;
 import com.luck.strategy.LotteryStrategyFactory;
 import com.luck.vo.*;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
- * 抽奖模版类
+ * 实时抽奖模版类
  *
  * @author liuyd
  * @date 2022/4/1 14:12
  */
 @Slf4j
-public abstract class AbstractLotteryTemplate implements IDrawExec {
+public abstract class AbstractRealTimeLotteryTemplate implements IDrawExec {
     @Autowired
     protected RenrenFeignClient client;
+
+    @Autowired
+    protected MQSender mqSender;
     @Override
     public LotteryResult doDrawExec(LotteryVo lotteryRequest) {
         // 1、获取抽奖策略
         // 获取活动配置
         R<ActivityConfigDetailVo> activityConfig = client.getConfig(lotteryRequest.getActivityId());
         ActivityConfigDetailVo data = activityConfig.getData();
+        if (data.getActivityStatus() != 0) {
+            throw new RuntimeException("活动状态以改变，activityId:"+lotteryRequest.getActivityId()+",activityStatus:"+data.getActivityStatus());
+        }
         // 2、校验抽奖策略是否已经初始化到内存
         this.checkAndInitRateData(lotteryRequest.getActivityId(), data.getStrategyType(), data.getPrizeList());
 
@@ -61,12 +64,7 @@ public abstract class AbstractLotteryTemplate implements IDrawExec {
                     excludeAwardIds, data, joinTimes+i);
             prizeIds.add(awardId);
         }
-        // 参数清理
-        params.clear();
-        params.put("activityId",data.getActivityId());
-        params.put("prizeIds", StringUtils.join(prizeIds.toArray(), ","));
-        // 4、记录抽奖信息
-        client.saveJoinDetail(params);
+        asyncProcess(prizeIds,lotteryRequest.getActivityId(),lotteryRequest.getTimestamp());
         // 5、包装中奖结果
         return buildDrawResult(lotteryRequest.getUserId(), lotteryRequest.getActivityId(), prizeIds);
     }
@@ -130,7 +128,7 @@ public abstract class AbstractLotteryTemplate implements IDrawExec {
     private LotteryResult buildDrawResult(Long uId, Long activityId, List<Long> prizeIds) {
         if (CollectionUtils.isEmpty(prizeIds)) {
             log.info("执行策略抽奖完成，奖品个数：{} 用户：{} 活动id：{}",prizeIds.size(), uId, activityId);
-            return new LotteryResult(uId, activityId, Constant.DrawState.FAIL.getCode(),null);
+            return new LotteryResult(uId,"", activityId, Constant.DrawState.FAIL.getCode(),null);
         }
         List<PrizeVo> prizes = new ArrayList<>(prizeIds.size());
         R<ActivityConfigDetailVo> config = client.getConfig(activityId);
@@ -143,6 +141,15 @@ public abstract class AbstractLotteryTemplate implements IDrawExec {
 
         log.info("执行策略抽奖完成，用户：{} 活动id：{} 奖品列表：{}", uId, activityId, prizes.toString());
 
-        return new LotteryResult(uId, activityId, Constant.DrawState.SUCCESS.getCode(), prizes);
+        return new LotteryResult(uId,"", activityId, Constant.DrawState.SUCCESS.getCode(), prizes);
     }
+
+    /**
+     * 异步处理
+     *
+     * @param prizeIds
+     * @param activityId
+     * @param timestamp
+     */
+    protected abstract void asyncProcess(List<Long> prizeIds, Long activityId, String timestamp);
 }

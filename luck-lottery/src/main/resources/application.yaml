@@ -12,10 +12,14 @@ spring:
     host: 127.0.0.1
     port: 6379
   datasource:
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://127.0.0.1:1433;database=renren
-    username: "sa"
-    password: "123456"
+#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#    url: jdbc:sqlserver://127.0.0.1:1433;database=renren
+#    username: "sa"
+#    password: "123456"
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/renren?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
     hikari:
       # 自动提交从池中返回的连接
       auto-commit: true
@@ -39,6 +43,27 @@ spring:
     cache: false
   mvc:
     static-path-pattern: /static/**
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    template:
+      retry:
+        enabled: true
+        initial-interval: 1000ms
+        max-attempts: 3
+        max-interval: 10000ms
+        multiplier: 1
+      mandatory: true
+    virtual-host: /
+    listener:
+      simple:
+        concurrency: 10
+        max-concurrency: 10
+        prefetch: 1
+        auto-startup: true
+        default-requeue-rejected: true
 #logging:
 #  level:
 #    root: DEBUG

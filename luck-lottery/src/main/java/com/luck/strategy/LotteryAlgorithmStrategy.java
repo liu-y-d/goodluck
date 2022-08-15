@@ -35,6 +35,9 @@ public interface LotteryAlgorithmStrategy {
 
     void initPrizeList(Long activityId, List<? extends PrizeProbabilityInfo> awardRateInfoList);
 
+    void initCustomerList(Long activityId, ActivityConfigDetailVo activityConfig);
+    List<Long> randomDraw(Long activityId, ActivityConfigDetailVo activityConfig);
+
     /**
      * 判断是否已经做了数据初始化
      *

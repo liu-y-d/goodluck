@@ -11,4 +11,8 @@
           AND prize_stock > 0
           AND prize_total_limit = 1
     </update>
+
+    <update id="resetStock">
+        update activity_prize set prize_stock = prize_total where activity_id = #{activityId}
+    </update>
 </mapper>

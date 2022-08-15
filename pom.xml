@@ -32,6 +32,7 @@
         <jjwt.version>0.9.1</jjwt.version>
         <security-jwt.version>1.0.10.RELEASE</security-jwt.version>
         <redis-version>2.1.14.RELEASE</redis-version>
+        <redisson-version>3.11.6</redisson-version>
         <security-oauth2-version>2.2.4.RELEASE</security-oauth2-version>
         <mssql.version>4.0</mssql.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -104,6 +105,11 @@
                 <groupId>org.springframework.security.oauth</groupId>
                 <artifactId>spring-security-oauth2</artifactId>
                 <version>${security-oauth2-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -21,6 +21,9 @@
         <result column = "batch_get" property="batchGet"/>
         <result column = "batch_get_number" property="batchGetNumber"/>
         <result column = "default_prize_id" property="defaultPrizeId"/>
+        <result column = "customers" property="customers"/>
+        <result column = "controller" property="controllerId"/>
+        <result column = "restart" property="restart"/>
 
 
 
@@ -43,6 +46,11 @@
                  join prize on activity_prize.prize_id = prize.prize_id
         where activity.activity_id = #{activityId};
     </select>
+    <select id="getStock" resultType="io.renren.modules.app.vo.ActivityPrizeVo">
+        select *
+        from activity_prize
+        where activity_prize.activity_id = #{activityId} and activity_prize.prize_id = #{prizeId};
+    </select>
     <select id="noStock" resultType="java.lang.Long" parameterType="java.lang.Long">
         SELECT activity_prize.prize_id
         FROM activity join activity_prize on activity.activity_id = activity_prize.activity_id
@@ -50,4 +58,7 @@
           AND prize_stock = 0
           AND prize_total_limit = 1
     </select>
+    <update id="stopActivity">
+        update activity set activity_status = 2 where activity_id = #{activityId} and activity_status = 0
+    </update>
 </mapper>

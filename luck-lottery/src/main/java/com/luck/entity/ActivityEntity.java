@@ -88,8 +88,23 @@ public class ActivityEntity implements Serializable {
 	private Integer batchGetNumber;
 	private Long defaultPrizeId;
 	/**
-	 * 活动状态 0 开启 1 关闭
+	 * 活动状态 0 开启 1 关闭 2 暂停
 	 */
 	private Integer activityStatus;
+
+	/**
+	 * 参与者列表
+	 */
+	private String customers;
+
+	/**
+	 * 控制者
+	 */
+	private Long controllerId;
+
+	/**
+	 * 允许重开奖 0 否 1是
+	 */
+	private int restart;
 
 }

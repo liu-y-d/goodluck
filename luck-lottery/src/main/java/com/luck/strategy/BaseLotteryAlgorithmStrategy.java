@@ -1,12 +1,16 @@
 package com.luck.strategy;
 
+import com.luck.vo.ActivityConfigDetailVo;
 import com.luck.vo.PrizeProbabilityInfo;
+import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
 import java.security.SecureRandom;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 /**
  * 抽奖算法基类
@@ -29,6 +33,20 @@ public abstract class BaseLotteryAlgorithmStrategy implements LotteryAlgorithmSt
      * 奖品区间概率值，strategyId -> [awardId->begin、awardId->end]
      */
     protected Map<Long, List<? extends PrizeProbabilityInfo>> prizeProbabilityInfo = new ConcurrentHashMap<>();
+    // /**
+
+    @Override
+    public void initCustomerList(Long activityId, ActivityConfigDetailVo activityConfig) {
+
+    }
+
+    @Override
+    public List<Long> randomDraw(Long activityId, ActivityConfigDetailVo activityConfig) {
+        return null;
+    }
+    //  * 活动固定的人员列表
+    //  */
+    // protected Map<Long, List<Long>> activityFixedCustomers = new ConcurrentHashMap<>();
 
     @Override
     public void initPrizeList(Long activityId, List<? extends PrizeProbabilityInfo> awardRateInfoList) {
@@ -51,6 +69,16 @@ public abstract class BaseLotteryAlgorithmStrategy implements LotteryAlgorithmSt
             cursorVal += rateVal;
         }
     }
+
+    // @Override
+    // public void initCustomerList(Long activityId, ActivityConfigDetailVo activityConfig) {
+    //     Integer participationLimit = activityConfig.getParticipationLimit();
+    //     if (participationLimit == 1 && StringUtils.isNotBlank(activityConfig.getCustomers())) {
+    //         activityFixedCustomers.put(activityId, Arrays.stream(activityConfig.getCustomers().split(",")).map(Long::parseLong).collect(Collectors.toList()));
+    //     }
+    //
+    // }
+
 
     @Override
     public boolean isExistRateTuple(Long activityId) {

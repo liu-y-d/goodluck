@@ -16,4 +16,6 @@ import org.apache.ibatis.annotations.Param;
 public interface ConfigPrizeDao extends BaseMapper<ActivityPrizeEntity> {
 
     int deductStock(@Param("activityId") Long activityId,@Param("prizeId") Long prizeId);
+
+    int resetStock(@Param("activityId") Long activityId);
 }

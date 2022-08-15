@@ -1,5 +1,6 @@
 package io.renren.modules.app.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -67,7 +68,7 @@ public class ActivityEntity implements Serializable {
 	private Integer winNewsLimit;
 
 	/**
-	 * 抽奖策略 0 普通 1 winprize 2 动态
+	 * 抽奖策略 0 普通 1 winprize 2 动态 3 Shuffle
 	 */
 	private Integer strategyType;
 	/**
@@ -88,8 +89,23 @@ public class ActivityEntity implements Serializable {
 	 */
 	private Long defaultPrizeId;
 	/**
-	 * 活动状态 0 开启 1 关闭
+	 * 活动状态 0 开启 1 关闭 2 暂停 3 已开奖 4 未开奖
 	 */
 	private Integer activityStatus;
 
+	/**
+	 * 参与者列表
+	 */
+	private String customers;
+
+	/**
+	 * 控制者
+	 */
+	@TableField("controller")
+	private Long controllerId;
+
+	/**
+	 * 允许重开奖 0 否 1是
+	 */
+	private int restart;
 }

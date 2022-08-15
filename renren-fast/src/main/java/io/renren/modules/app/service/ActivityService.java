@@ -4,6 +4,7 @@ package io.renren.modules.app.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import io.renren.common.utils.PageUtils;
 import io.renren.modules.app.entity.ActivityEntity;
+import io.renren.modules.app.entity.ActivityPrizeVO;
 import io.renren.modules.app.vo.ActivityConfigDetailVo;
 import io.renren.modules.app.vo.ActivityConfigVo;
 
@@ -25,8 +26,14 @@ public interface ActivityService extends IService<ActivityEntity> {
 
     ActivityConfigDetailVo getConfig(Long activityId);
 
-    Boolean deductStock(Long activityId, Long prizeId);
+    Boolean updateStock(Long activityId, Long prizeId);
 
     List<Long> noStock(Long activityId);
+
+    Integer getStock(Long activityId, Long prizeId);
+
+    boolean stopActivity(Long activityId);
+
+    boolean addStock(List<ActivityPrizeVO> activityEntities);
 }
 

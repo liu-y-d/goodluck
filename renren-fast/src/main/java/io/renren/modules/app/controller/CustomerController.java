@@ -45,7 +45,7 @@ public class CustomerController {
     public R info(@PathVariable("cId") Long cId){
 		CustomerEntity customer = customerService.getById(cId);
 
-        return R.ok().put("customer", customer);
+        return R.ok().put("data", customer);
     }
     /**
      * 信息

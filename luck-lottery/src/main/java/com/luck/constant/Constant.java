@@ -12,12 +12,19 @@ public interface Constant {
     String LOTTERY_STRATEGY_WIN = "win";
     String LOTTERY_STRATEGY_DYNAMIC = "dynamic";
 
+    String LOTTERY_STRATEGY_SHUFFLE = "shuffle";
+
+    String QUEUE="queue_stock";
+    String EXCHANGE="stockExchange";
+    String ROUTINGKEY = "luckStock.#";
+
     @AllArgsConstructor
     @Getter
     enum LotteryStrategyEnum {
         LOTTERY_STRATEGY_NORMAL(0,"normal"),
         LOTTERY_STRATEGY_WIN(1,"win"),
-        LOTTERY_STRATEGY_DYNAMIC(2,"dynamic");
+        LOTTERY_STRATEGY_DYNAMIC(2,"dynamic"),
+        LOTTERY_STRATEGY_SHUFFLE(3,"shuffle");
 
         private int code;
 

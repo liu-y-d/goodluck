@@ -1,7 +1,11 @@
 package com.luck.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 /**
  * 抽奖对象
@@ -23,4 +27,9 @@ public class LotteryVo {
      * 抽取次数
      */
     private Integer getTimes;
+
+    /**
+     * 时间戳
+     */
+    private String timestamp;
 }

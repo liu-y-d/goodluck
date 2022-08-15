@@ -3,6 +3,7 @@ package com.luck.feign;
 import com.luck.api.R;
 import com.luck.entity.ActivityEntity;
 import com.luck.entity.CustomerActivityDetailEntity;
+import com.luck.entity.CustomerEntity;
 import com.luck.entity.CustomerIntegralEntity;
 import com.luck.vo.ActivityConfigDetailVo;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -32,6 +33,8 @@ public interface RenrenFeignClient {
     R<CustomerIntegralEntity> info(@PathVariable("cId") Long cId);
     @GetMapping("/activity/deduct/stock")
     R deductStock(@RequestParam("activityId") Long activityId,@RequestParam("prizeId") Long prizeId);
+    @GetMapping("/activity/update/stock")
+    R updateStock(@RequestParam("activityId") Long activityId,@RequestParam("prizeId") Long prizeId);
 
     @GetMapping("/activity/nostock/{activityId}")
     R<List<Long>> nostock(@PathVariable("activityId") Long activityId);
@@ -41,4 +44,13 @@ public interface RenrenFeignClient {
 
     @GetMapping(value = "/customeractivitydetail/joinActivityDetail", produces = "application/json;charset=utf-8")
     R<List<CustomerActivityDetailEntity>> joinActivityDetail(@RequestParam Map<String, Object> params);
+
+    @GetMapping(value = "/activity/resetStock")
+    R<Integer> resetStock(@RequestParam("activityId") Long activityId);
+
+    @GetMapping(value = "/customeractivitydetail/deleteCustomerJoinDetail")
+    R<Integer> deleteCustomerJoinDetail(@RequestParam("activityId") Long activityId);
+
+    @GetMapping("/customer/info/{cId}")
+    R<CustomerEntity> customerInfo(@PathVariable("cId") Long cId);
 }

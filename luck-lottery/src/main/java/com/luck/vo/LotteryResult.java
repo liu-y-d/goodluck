@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class LotteryResult {
     private Long userId;
+    private String userName;
 
     private Long activityId;
 

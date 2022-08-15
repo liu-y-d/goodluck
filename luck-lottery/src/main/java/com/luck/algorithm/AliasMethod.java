@@ -1,5 +1,5 @@
 
-package com.luck.constant;
+package com.luck.algorithm;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;

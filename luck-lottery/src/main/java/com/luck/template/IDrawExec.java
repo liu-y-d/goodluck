@@ -3,6 +3,8 @@ package com.luck.template;
 import com.luck.vo.LotteryResult;
 import com.luck.vo.LotteryVo;
 
+import java.util.List;
+
 /**
  * 执行抽奖接口
  *

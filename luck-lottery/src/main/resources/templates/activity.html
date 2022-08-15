@@ -96,15 +96,20 @@
 
                             <footer class="entry-footer flex justify-content-between align-items-center">
                                     <div class="course-cost">
-                                        <#--无成本-免费-->
-                                        <#if activity.participationCostType == 0>
-                                            <span class="free-cost">Free</span>
-                                        <#--积分-->
-                                        <#elseif activity.participationCostType == 1>
-                                            积分：${activity.participationCost}
+                                        <#if activity.customers??>
+
+                                        <#else>
+                                            <#--无成本-免费-->
+                                            <#if activity.participationCostType == 0>
+                                                <span class="free-cost">Free</span>
+                                            <#--积分-->
+                                            <#elseif activity.participationCostType == 1>
+                                                积分：${activity.participationCost}
                                             <#--<span class="price-drop">$68</span>-->
+                                            </#if>
                                         </#if>
-                                    </div><!-- .course-cost -->
+
+                                </div><!-- .course-cost -->
 
 
                                 <#--抽多少次必中大奖-->
